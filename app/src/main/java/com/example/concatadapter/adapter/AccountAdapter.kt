@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
-import com.example.concatadapter.ItemAccount
-import com.example.concatadapter.ItemMultipleType
-import com.example.concatadapter.R
+import com.example.concatadapter.*
 import com.example.concatadapter.adapter.BaseDifferentAdapter.BaseViewHolder
 
 class AccountAdapter :
@@ -19,17 +17,21 @@ class AccountAdapter :
         viewType: Int
     ): BaseViewHolder<ItemMultipleType> {
         return when (viewType) {
-            0 -> HeaderViewHolder(
+            ItemHeader.ITEM_VIEW_TYPE -> HeaderViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_header, parent, false)
             )
-            1 -> AccountViewHolder(
+            ItemAccount.ITEM_VIEW_TYPE -> AccountViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_account, parent, false)
             )
-            2 -> FooterViewHolder(
+            ItemFooter.ITEM_VIEW_TYPE -> FooterViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_footer, parent, false)
+            )
+            ItemLoading.ITEM_VIEW_TYPE -> LoadingViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_loading, parent, false)
             )
             else -> {
                 error("Doesn't support viewType: $viewType")

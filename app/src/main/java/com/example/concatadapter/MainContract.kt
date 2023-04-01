@@ -10,7 +10,7 @@ import kotlin.random.Random
 
 interface MainContract {
     abstract class MainViewModel : ViewModel() {
-        abstract val notification: LiveData<ItemNotification>
+        abstract val notification: LiveData<List<ItemMultipleType>>
 
         abstract val accounts: LiveData<List<ItemMultipleType>>
 
@@ -21,15 +21,15 @@ interface MainContract {
 }
 
 class ViewModelImpl : MainContract.MainViewModel() {
-    private var _notification = MutableLiveData<ItemNotification>()
-    override val notification: LiveData<ItemNotification>
+    private var _notification = MutableLiveData(listOf<ItemMultipleType>(ItemLoading()))
+    override val notification: LiveData<List<ItemMultipleType>>
         get() = _notification
 
-    private var _accounts = MutableLiveData<List<ItemMultipleType>>()
+    private var _accounts = MutableLiveData(listOf<ItemMultipleType>(ItemLoading()))
     override val accounts: LiveData<List<ItemMultipleType>>
         get() = _accounts
 
-    private val _netPositions = MutableLiveData<List<ItemMultipleType>>()
+    private val _netPositions = MutableLiveData(listOf<ItemMultipleType>(ItemLoading()))
     override val netPositions: LiveData<List<ItemMultipleType>>
         get() = _netPositions
 
@@ -48,29 +48,25 @@ class ViewModelImpl : MainContract.MainViewModel() {
     private suspend fun fetchNetPositions(): List<ItemMultipleType> {
         Timber.d { "fetchNetPositions()" }
         return withContext(Dispatchers.IO) {
-            delay(1000)
+            delay(2000)
             listOf(
-                ItemHeader(title = "Net Position", enableMore = true, itemViewType = 0),
+                ItemHeader(title = "Net Position", enableMore = true),
 
                 ItemNetPosition(
                     total = "Total credit balance",
                     value = "-$66.99",
-                    itemViewType = 1
                 ),
                 ItemNetPosition(
                     total = "Total credit balance",
                     value = "-$66.99",
-                    itemViewType = 1
                 ),
                 ItemNetPosition(
                     total = "Total credit balance",
                     value = "-$66.99",
-                    itemViewType = 1
                 ),
                 ItemNetPosition(
                     total = "Total credit balance",
                     value = "-$66.99",
-                    itemViewType = 1
                 ),
 
                 ItemNetPositionDes(desc = "Total reflect the current and/or investment balances shown above (other than the Traveller card)")
@@ -121,9 +117,9 @@ class ViewModelImpl : MainContract.MainViewModel() {
     private suspend fun fetchAccounts(): List<ItemMultipleType> {
         Timber.d { "fetchAccounts()" }
         return withContext(Dispatchers.IO) {
-            delay(1500)
+            delay(3000)
             listOf(
-                ItemHeader(title = "Accounts", enableMore = true, itemViewType = 0),
+                ItemHeader(title = "Accounts", enableMore = true),
 
                 ItemAccount(
                     icon = R.drawable.ic_card_24,
@@ -149,21 +145,21 @@ class ViewModelImpl : MainContract.MainViewModel() {
                     desc = "Transaction Account 985769",
                 ),
 
-                ItemFooter
+                ItemFooter()
             )
         }
     }
 
     private fun loadNotification() {
         viewModelScope.launch {
-            _notification.value = fetchNotification()
+            _notification.value = listOf(fetchNotification())
         }
     }
 
     private suspend fun fetchNotification(): ItemNotification {
         Timber.d { "fetchNotification()" }
         return withContext(Dispatchers.IO) {
-            delay(5000)
+            delay(1000)
             ItemNotification()
         }
     }

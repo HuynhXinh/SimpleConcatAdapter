@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         with(mainViewModel) {
             notification.observe(this@MainActivity) {
-                notificationAdapter.submitList(listOf(it))
+                notificationAdapter.submitList(it)
                 recyclerView.scrollToPosition(0)
             }
 

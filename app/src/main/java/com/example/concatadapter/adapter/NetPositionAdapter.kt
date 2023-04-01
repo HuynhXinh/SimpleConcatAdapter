@@ -17,17 +17,21 @@ class NetPositionAdapter :
         viewType: Int
     ): BaseViewHolder<ItemMultipleType> {
         return when (viewType) {
-            0 -> HeaderViewHolder(
+            ItemHeader.ITEM_VIEW_TYPE -> HeaderViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_header, parent, false)
             )
-            1 -> NetPositionViewHolder(
+            ItemNetPosition.ITEM_VIEW_TYPE -> NetPositionViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_net_position, parent, false)
             )
-            2 -> NetPositionDesViewHolder(
+            ItemNetPositionDes.ITEM_VIEW_TYPE -> NetPositionDesViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_net_position_des, parent, false)
+            )
+            ItemLoading.ITEM_VIEW_TYPE -> LoadingViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_loading, parent, false)
             )
             else -> {
                 error("Doesn't support viewType: $viewType")
@@ -45,7 +49,8 @@ class NetPositionAdapter :
         }
     }
 
-    inner class NetPositionDesViewHolder(itemView: View) : BaseViewHolder<ItemNetPositionDes>(itemView) {
+    inner class NetPositionDesViewHolder(itemView: View) :
+        BaseViewHolder<ItemNetPositionDes>(itemView) {
         private val descTextView: TextView = itemView.findViewById(R.id.description)
 
         override fun bind(data: ItemNetPositionDes, position: Int) {
