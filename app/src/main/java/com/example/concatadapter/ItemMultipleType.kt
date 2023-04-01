@@ -17,10 +17,18 @@ data class ItemHeader(
     val title: String,
     val enableMore: Boolean,
     override val itemViewType: Int = 0
-) : ItemMultipleType
+) : ItemMultipleType {
+    override fun areItemsTheSame(newItem: ItemMultipleType): Boolean {
+        return true
+    }
+}
 
 object ItemFooter : ItemMultipleType {
     override val itemViewType: Int = 2
+
+    override fun areItemsTheSame(newItem: ItemMultipleType): Boolean {
+        return true
+    }
 }
 
 data class ItemAccount(
