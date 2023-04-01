@@ -98,7 +98,7 @@ class ViewModelImpl : MainContract.MainViewModel() {
     }
 
     private suspend fun getBalance(account: ItemAccount): ItemAccount {
-        val delay = Random.nextLong(4000) + 1000
+        val delay = Random.nextLong(4000) + 1000 // 1s - 5s
         Timber.d { "Start getBalance($account) with delay: $delay" }
         delay(delay)
         Timber.d { "Got result after delay: $delay" }

@@ -13,7 +13,7 @@ class SpaceAdapter(private val space: Int) : RecyclerView.Adapter<RecyclerView.V
         }
         val params = RecyclerView.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            space
+            space // height space
         )
         view.layoutParams = params
         return object : RecyclerView.ViewHolder(view) {}

@@ -21,18 +21,22 @@ class AccountAdapter :
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_header, parent, false)
             )
+
             ItemAccount.ITEM_VIEW_TYPE -> AccountViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_account, parent, false)
             )
+
             ItemFooter.ITEM_VIEW_TYPE -> FooterViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_footer, parent, false)
             )
+
             ItemLoading.ITEM_VIEW_TYPE -> LoadingViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_loading, parent, false)
             )
+
             else -> {
                 error("Doesn't support viewType: $viewType")
             }
@@ -53,7 +57,7 @@ class AccountAdapter :
         private fun getBalance(availableBalance: ItemAccount.Balance): String {
             return when (availableBalance) {
                 is ItemAccount.Balance.Available -> "${availableBalance.name} - ${availableBalance.value}"
-                ItemAccount.Balance.Error -> "Fail to get blance"
+                ItemAccount.Balance.Error -> "Fail to get balance"
                 ItemAccount.Balance.Loading -> "Loading...."
             }
         }

@@ -18,14 +18,17 @@ class NotificationAdapter :
         viewType: Int
     ): BaseViewHolder<ItemMultipleType> {
         return when (viewType) {
+
             ItemLoading.ITEM_VIEW_TYPE -> LoadingViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_loading, parent, false)
             )
+
             ItemNotification.ITEM_VIEW_TYPE -> NotificationViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_notification, parent, false)
             )
+
             else -> {
                 error("Doesn't support viewType: $viewType")
             }
